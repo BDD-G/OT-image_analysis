@@ -1,0 +1,37 @@
+installed packages
+- go to requirements.txt path
+- Usage: pip install -r requirements.txt
+
+use detect_label_single.py
+(Complicated. Need to confirm the file path)
+
+- Usage: python detect_label_single.py --weights "weights(.pt file)-path" --source "image-path"
+
+- If the path is fixed, you can set the default weight file path on line 212 of the "detect_label_single.py"
+
+or
+
+use  in other python file
+    source = 'image-path'
+    weights-path = "weights(.pt file)-path"
+    detect-file-path = 'detect_label_single.py-path'
+    # no need to add this if weight has been changed in the detect file (line 212)
+
+    arguments = ["--source", source ,"--weights", weights-path]
+    
+    detect_process = subprocess.run(["python", detect-file-path] + arguments, capture_output=True, text=True)
+    # get the bounding box location
+    output = completed_process.stdout
+
+use detection_functions.py (tips amount, liquid level, colour) 
+    import detection_functions as DF
+
+    # get informations of tips and liquids
+    tips, liquids = DF.detect(output)
+    # get liquid threshold
+    threshold = DF.save_threshold(tips,liquids)
+    # match boxes
+    DF.match_boxes(tips,liquids,threshold)
+    # detect colour 
+    - add more colour (line 128, use hue to adjust colour)
+    DF.colour(liquids,source)

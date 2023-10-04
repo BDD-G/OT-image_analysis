@@ -1,0 +1,6 @@
+1. weights path in detect_label_single
+
+2. OT_image_maker_wrapper-v1.ipynb
+    source = 'save-image-to-path'
+    image_name = 'name-of-image'
+    file_path = 'detect-python-file-path'
